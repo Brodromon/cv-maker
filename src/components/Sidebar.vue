@@ -1,54 +1,55 @@
 <template>
-      <div v-if="id" id="sidebar-wrapper">
-      <div class="sidebar-hdr">
-          <h4>Edit</h4>
-      </div>
-      <ul class="resumeHdr" v-if="id=='resumehdr'">
-          <li><h5>Name: </h5><input v-model="toEdit.resumeHdr.person.fname" type="text"></li>
-          <li><h5>Surname: </h5><input v-model="toEdit.resumeHdr.person.lname" type="text"></li>
-          <li><h5>Number: </h5><input v-model="toEdit.resumeHdr.person.personData.number" type="text"></li>
-          <li><h5>E-mail: </h5><input v-model="toEdit.resumeHdr.person.personData.email" type="email"></li>
-          <li><h5>Adress: </h5><input v-model="toEdit.resumeHdr.person.personData.adress" type="text"></li>
-      </ul>
-      <ul class="resumeAbout" v-if="id=='resumeAbout'">
-          <textarea v-model="toEdit.resumeAbout.text"></textarea>
-      </ul>
-      <ul class="resumeEdu" v-if="id == 'resumeEdu'">
-          <li v-for="edu in toEdit.resumeEdu.eduPlaces">
-                <h5>Name: </h5><input required v-model="edu.placeName" type="text">
-                <h5>Graduate: </h5><input required v-model="edu.graduate" type="text">
-                <h5>Country: </h5><input required v-model="edu.country" type="text">
-                <h5>City: </h5><input required v-model="edu.city" type="text">
-                <h5>Start date: </h5><input required v-model="edu.startYear" type="date">
-                <h5>End date: </h5><input required v-model="edu.endYear" type="date">
-          </li>
-      </ul>
-      <ul class="resumeExp exp-places" v-if="id=='resumeExp'">
-              <li v-for="(place,i) in toEdit.resumeExp.expPlaces" class="exp-place">
-                  <div class="closed" v-if="place.closed == true">
-                    <h5>{{ place.position }}</h5>
-                    <i @click="place.closed = false">More...</i>
-                  </div>
-                  <div  v-if="place.closed == false">
-                        <span>{{ i+1 }}</span>
-                        <h5>Position: </h5><input required v-model="place.position" type="text">
-                        <h5>Company: </h5><input required v-model="place.compName" type="text">
-                        <h5 v-if="place.error" class="work-date-error">Start date can not be later than end date!</h5>
-                        <h5>Start date: </h5><input required v-model="place.startYear" type="date">
-                        <h5>End date: </h5><input required v-model="place.endYear" type="date">
-                        
-                        <textarea placeholder="Description" v-model="place.desc"></textarea>
-                        <button @click="place.closed = true" class="btn btn-save-place">Save</button>
-                        <button @click="deleteExpPlace(i)" class="btn btn-delete-place">Delete</button>
-                  </div>
-              </li>
-          <button v-bind:disabled="toEdit.resumeExp.btnDisabled" @click="addExpPlace()" class="btn add-place">+</button>
-      </ul>
-      <ul v-if="id=='resumeSkills'">
-          <li>{{ toEdit.person.fname.hdr }}<input v-bind:placeholder="toEdit.person.fname.text" type="text"></li>
-          <li>{{ toEdit.person.lname.hdr }}<input v-bind:placeholder="toEdit.person.lname.text" type="text"></li>
-      </ul>
-  </div>
+    <div v-if="id" id="sidebar-wrapper">
+        <div class="sidebar-hdr">
+            <h4>Edit</h4>
+        </div>
+        <ul class="resumeHdr" v-if="id=='resumehdr'">
+            <li><h5>Name: </h5><input v-model="toEdit.resumeHdr.person.fname" type="text"></li>
+            <li><h5>Surname: </h5><input v-model="toEdit.resumeHdr.person.lname" type="text"></li>
+            <li><h5>Number: </h5><input v-model="toEdit.resumeHdr.person.personData.number" type="text"></li>
+            <li><h5>E-mail: </h5><input v-model="toEdit.resumeHdr.person.personData.email" type="email"></li>
+            <li><h5>Adress: </h5><input v-model="toEdit.resumeHdr.person.personData.adress" type="text"></li>
+        </ul>
+        <ul class="resumeAbout" v-if="id=='resumeAbout'">
+            <textarea v-model="toEdit.resumeAbout.text"></textarea>
+        </ul>
+        <ul class="resumeEdu" v-if="id == 'resumeEdu'">
+            <li v-for="(edu, i) in toEdit.resumeEdu.eduPlaces">
+                    <h5>Name: </h5><input required v-model="edu.placeName" type="text">
+                    <h5>Graduate: </h5><input required v-model="edu.graduate" type="text">
+                    <h5>Country: </h5><input required v-model="edu.country" type="text">
+                    <h5>City: </h5><input required v-model="edu.city" type="text">
+                    <h5>Start date: </h5><input v-on:blur="checkIfEndIsLower(i);" required v-model="edu.startYear" type="date">
+                    <h5>End date: </h5><input v-on:blur="checkIfEndIsLower(i);" required v-model="edu.endYear" type="date">
+                    <h5 class="error" v-if="edu.error">Start date can not be later than end date!</h5>
+            </li>
+        </ul>
+        <ul class="resumeExp exp-places" v-if="id=='resumeExp'">
+                <li v-for="(place,i) in toEdit.resumeExp.expPlaces" class="exp-place">
+                    <div class="closed" v-if="place.closed == true">
+                        <h5>{{ place.position }}</h5>
+                        <i @click="place.closed = false">More...</i>
+                    </div>
+                    <div  v-if="place.closed == false">
+                            <span>{{ i+1 }}</span>
+                            <h5>Position: </h5><input required v-model="place.position" type="text">
+                            <h5>Company: </h5><input required v-model="place.compName" type="text">
+                            <h5 v-if="place.error" class="work-date-error">Start date can not be later than end date!</h5>
+                            <h5>Start date: </h5><input required v-model="place.startYear" type="date">
+                            <h5>End date: </h5><input required v-model="place.endYear" type="date">
+                            
+                            <textarea placeholder="Description" v-model="place.desc"></textarea>
+                            <button @click="place.closed = true" class="btn btn-save-place">Save</button>
+                            <button @click="deleteExpPlace(i)" class="btn btn-delete-place">Delete</button>
+                    </div>
+                </li>
+            <button v-bind:disabled="toEdit.resumeExp.btnDisabled" @click="addExpPlace()" class="btn add-place">+</button>
+        </ul>
+        <ul v-if="id=='resumeSkills'">
+            <li>{{ toEdit.person.fname.hdr }}<input v-bind:placeholder="toEdit.person.fname.text" type="text"></li>
+            <li>{{ toEdit.person.lname.hdr }}<input v-bind:placeholder="toEdit.person.lname.text" type="text"></li>
+        </ul>
+    </div>
 </template>
 
 <script>
@@ -81,7 +82,8 @@ export default {
                             city: '',
                             country: '',
                             startYear: '',
-                            endYear: ''
+                            endYear: '',
+                            error: Boolean
                         }
                     ]
                 },
@@ -112,12 +114,11 @@ export default {
     }
   },
   methods: {
-    saveChangesHdr(data) {
-        EventBus.$emit('saved-changes-hdr', data)
-            console.log(this.toEdit.resumeHdr.person)
-    },
-    check() {
-        console.log(this.toEdit.resumeHdr.person.fname)
+    checkIfEndIsLower(i) {
+        if(this.toEdit.resumeEdu.eduPlaces[i].startYear >= this.toEdit.resumeEdu.eduPlaces[i].endYear) 
+            this.toEdit.resumeEdu.eduPlaces[i].error = true
+        else 
+            this.toEdit.resumeEdu.eduPlaces[i].error = false
     },
     addExpPlace() {
             this.toEdit.resumeExp.expPlaces.push({position: 'qwe', compName: '',startYear: '', endYear: '', desc: '', error: false, closed: false})
@@ -129,13 +130,11 @@ export default {
   created() {
     EventBus.$on('resume-hdr-edit', (data, id) => {
         this.toEdit.resumeHdr.person = data;
-        data = null;
-        this.id = id;
-        console.log(this.toEdit.resumeHdr.person)
+        this.id = id
     })
     EventBus.$on('resume-about-edit', (data, id) => {
         this.toEdit.resumeAbout = data;
-        this.id = id;
+        this.id = id
     })
     EventBus.$on('resume-exp-edit', (data, id) => {
         this.toEdit.resumeExp.expPlaces = data;
@@ -196,11 +195,15 @@ export default {
         }
         h5 {
             display: inline-block;
-            width: 30%;
+            width: 33%;
             font-weight: bold;
         }
+        h5.error {
+            width: 100%;
+            color: red;
+        }
         input {
-            width: 69%;
+            width: 66%;
             display: inline-block;
             border: none;
             background: rgba(0, 0, 0, .04);

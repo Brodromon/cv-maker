@@ -105,24 +105,27 @@ export default {
             graduate: 'Graduate',
             city: 'Bydgoszcz',
             country: 'Poland',
-            startYear: '2017',
-            endYear: '2020'
+            startYear: '2017-09-01',
+            endYear: '2020-03-01',
+            error: false
           },
           {
             placeName: 'NAU',
             graduate: 'Graduate',
             city: 'Kyiv',
             country: 'Ukraine',
-            startYear: '2017',
-            endYear: '2020'
+            startYear: '2017-09-01',
+            endYear: '2020-03-01',
+            error: false
           },
           {
             placeName: 'KPI',
             graduate: 'Graduate',
             city: 'Kyiv',
             country: 'Ukraine',
-            startYear: '2017',
-            endYear: '2020'
+            startYear: '2017-09-01',
+            endYear: '2020-03-01',
+            error: false
           }
         ],
         id: "resumeEdu"
@@ -145,7 +148,7 @@ export default {
             endYear: '2017-05-12',
             desc: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Deleniti aliquid vel optio dolores doloremque delectus. Ipsa enim at eveniet quibusdam minus aut quas voluptatem eligendi, ipsam odit cupiditate laborum vel.',
             error: false,
-            closed: false
+            closed: true
           }
         ],
         id: "resumeExp"
