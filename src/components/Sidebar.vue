@@ -19,8 +19,8 @@
                     <h5>Graduate: </h5><input required v-model="edu.graduate" type="text">
                     <h5>Country: </h5><input required v-model="edu.country" type="text">
                     <h5>City: </h5><input required v-model="edu.city" type="text">
-                    <h5>Start date: </h5><input v-on:blur="checkIfEndIsLower(i);" required v-model="edu.startYear" type="date">
-                    <h5>End date: </h5><input v-on:blur="checkIfEndIsLower(i);" required v-model="edu.endYear" type="date">
+                    <h5>Start date: </h5><input v-on:blur="checkIfEndIsLowerEdu(i);" required v-model="edu.startYear" type="date">
+                    <h5>End date: </h5><input v-on:blur="checkIfEndIsLowerEdu(i);" required v-model="edu.endYear" type="date">
                     <h5 class="error" v-if="edu.error">Start date can not be later than end date!</h5>
             </li>
         </ul>
@@ -34,10 +34,10 @@
                             <span>{{ i+1 }}</span>
                             <h5>Position: </h5><input required v-model="place.position" type="text">
                             <h5>Company: </h5><input required v-model="place.compName" type="text">
-                            <h5 v-if="place.error" class="work-date-error">Start date can not be later than end date!</h5>
-                            <h5>Start date: </h5><input required v-model="place.startYear" type="date">
-                            <h5>End date: </h5><input required v-model="place.endYear" type="date">
-                            
+                            <h5>Start date: </h5><input v-on:blur="checkIfEndIsLowerExp(i)" required v-model="place.startYear" type="date">
+                            <h5>End date: </h5><input v-on:blur="checkIfEndIsLowerExp(i)" required v-model="place.endYear" type="date">
+                            <h5 class="error" v-if="place.error">Start date can not be later than end date!</h5>
+
                             <textarea placeholder="Description" v-model="place.desc"></textarea>
                             <button @click="place.closed = true" class="btn btn-save-place">Save</button>
                             <button @click="deleteExpPlace(i)" class="btn btn-delete-place">Delete</button>
@@ -114,11 +114,17 @@ export default {
     }
   },
   methods: {
-    checkIfEndIsLower(i) {
+    checkIfEndIsLowerEdu(i) {
         if(this.toEdit.resumeEdu.eduPlaces[i].startYear >= this.toEdit.resumeEdu.eduPlaces[i].endYear) 
             this.toEdit.resumeEdu.eduPlaces[i].error = true
         else 
             this.toEdit.resumeEdu.eduPlaces[i].error = false
+    },
+    checkIfEndIsLowerExp(i) {
+        if(this.toEdit.resumeExp.expPlaces[i].startYear >= this.toEdit.resumeExp.expPlaces[i].endYear) 
+            this.toEdit.resumeExp.expPlaces[i].error = true
+        else 
+            this.toEdit.resumeExp.expPlaces[i].error = false
     },
     addExpPlace() {
             this.toEdit.resumeExp.expPlaces.push({position: 'qwe', compName: '',startYear: '', endYear: '', desc: '', error: false, closed: false})

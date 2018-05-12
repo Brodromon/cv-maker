@@ -135,7 +135,7 @@ export default {
           {
             position: 'Programista www',
             compName: 'RegRu Inc.',
-            startYear: '2020-05-12',
+            startYear: '2012-05-12',
             endYear: '2017-05-12',
             desc: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Deleniti aliquid vel optio dolores doloremque delectus. Ipsa enim at eveniet quibusdam minus aut quas voluptatem eligendi, ipsam odit cupiditate laborum vel.',
             error: false,
