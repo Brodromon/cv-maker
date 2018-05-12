@@ -46,8 +46,12 @@
             <button v-bind:disabled="toEdit.resumeExp.btnDisabled" @click="addExpPlace()" class="btn add-place">+</button>
         </ul>
         <ul v-if="id=='resumeSkills'">
-            <li>{{ toEdit.person.fname.hdr }}<input v-bind:placeholder="toEdit.person.fname.text" type="text"></li>
-            <li>{{ toEdit.person.lname.hdr }}<input v-bind:placeholder="toEdit.person.lname.text" type="text"></li>
+            <li class="skill" v-for="(skill,i) in toEdit.resumeSkills.skills">
+                <h5 v-if="!skill.edit">{{skill.text}}</h5>
+                <input v-if="skill.edit" type="text" v-model="toEdit.resumeSkills.editInput">
+                <button v-if="!skill.edit" @click="edit(i)" class="fas fa-pencil-alt"></button>
+                <button v-if="skill.edit" @click="saveEdit(i)" class="fas fa-check"></button>
+            </li>
         </ul>
     </div>
 </template>
@@ -107,8 +111,16 @@ export default {
                         error: Boolean,
                         closed: Boolean
                     }
-                ],
-                btnDisabled: false
+                    ],
+                },
+                resumeSkills: {
+                    skills: [
+                        {
+                            text: '',
+                            edit: Boolean
+                        }
+                    ],
+                    editInput: ''
                 }
         }
     }
@@ -125,6 +137,10 @@ export default {
             this.toEdit.resumeExp.expPlaces[i].error = true
         else 
             this.toEdit.resumeExp.expPlaces[i].error = false
+    },
+    edit(i) {
+    },
+    saveEdit(i) {
     },
     addExpPlace() {
             this.toEdit.resumeExp.expPlaces.push({position: 'qwe', compName: '',startYear: '', endYear: '', desc: '', error: false, closed: false})
@@ -150,15 +166,21 @@ export default {
         this.toEdit.resumeEdu.eduPlaces = data;
         this.id = id
     })
+    EventBus.$on('resume-skills-edit', (data, id) => {
+        this.toEdit.resumeSkills.skills = data;
+        this.id = id
+    })
   }
 }
 </script>
 
 <style lang="less">
     #sidebar-wrapper {
-        position: absolute;
+        position: fixed;
+        overflow-y: auto;
         left: -2px;
         top: 100px;
+        max-height: 87vh;
         background: #fff;
         left: 0;
         border: 2px #e8e8e8 solid;
@@ -246,10 +268,6 @@ export default {
                     }
                 }
                 }
-                .work-date-error {
-                    color: red;
-                    width: 100%;
-                }
                 
                 span {
                     position: absolute;
@@ -289,6 +307,26 @@ export default {
                     font-size: 30px;
                     padding: 2px;
                 }
+        }
+        .skill {
+            &:first-child {
+                padding-top: 7px;
+            }
+            position: relative;
+            &:hover {
+                .fas {
+                    opacity: .4 ;
+                }
+            }
+            .fas {
+                background: transparent;
+                border: none;
+                position: absolute;
+                right: 0;
+                top: 50%;
+                margin-top: -7px;
+                opacity: 0;
+            }
         }
     }
 

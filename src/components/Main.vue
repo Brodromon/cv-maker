@@ -59,12 +59,12 @@
           </div>
         </div>
         <hr>
-        <div  class="block resume__skills row">
+        <div v-on:click="resumeSkillsEdit(resumeSkills.skills, resumeSkills.id)"  class="block resume__skills row">
           <div class="col-md-10 col-md-offset-1">
             <h5 class="block__hdr">Skills</h5>
             <ul class="row skills">
               <li v-for="skill in resumeSkills.skills" class="skill col-md-3">
-                <p>{{skill}}</p>
+                <p>{{skill.text}}</p>
               </li>
             </ul>
           </div>
@@ -155,13 +155,29 @@ export default {
       },
       resumeSkills: {
         skills: [
-          'Bootstrap',
-          'JS',
-          'EcmaScript 6',
-          'Gulp',
-          'Vue.js',
+          {
+            text: 'Bootstrap',
+            edit: false
+          },
+          {
+            text: 'JS',
+            edit: false
+          },
+          {
+            text: 'HTML',
+            edit: false
+          },
+          {
+            text: 'Git',
+            edit: false
+          },
+          {
+            text: 'Less',
+            edit: false
+          },
         ],
-        id: "resumeEdu"
+        id: "resumeSkills",
+        edit: false
       }
     }
   },
@@ -177,6 +193,9 @@ export default {
     },
     resumeExpEdit(data, id) {
       EventBus.$emit('resume-exp-edit', data, id)
+    },
+    resumeSkillsEdit(data, id) {
+      EventBus.$emit('resume-skills-edit', data, id)
     }
   }
 }
