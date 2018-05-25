@@ -64,7 +64,7 @@
             <h5 class="block__hdr">Skills</h5>
             <ul class="row skills">
               <li v-for="skill in resumeSkills.skills" class="skill col-md-3">
-                <p>{{skill.text}}</p>
+                <p>{{skill}}</p>
               </li>
             </ul>
           </div>
@@ -92,11 +92,11 @@ export default {
             adress: 'Polska 29'
           }
         },
-        id: 'resumehdr'
+        id: 'Header'
       },
       resumeAbout: {
         text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem quam alias consequuntur voluptas esse doloribus vel eaque nobis adipisci aspernatur tempora voluptatibus quae incidunt distinctio sint, quaerat dicta magni magnam?Illum, molestiae dignissimos accusamus perferendis voluptatem possimus natus exercitationem, ex vel repudiandae eos blanditiis pariatur dolor mollitia maxime ullam sit optio soluta labore quibusdam sunt eum fuga? Cumque, itaque nam.',
-        id: "resumeAbout"
+        id: "About"
       },
       resumeEdu: {
         eduPlaces: [
@@ -107,7 +107,8 @@ export default {
             country: 'Poland',
             startYear: '2017-09-01',
             endYear: '2020-03-01',
-            error: false
+            error: false,
+            closed: true
           },
           {
             placeName: 'NAU',
@@ -116,7 +117,8 @@ export default {
             country: 'Ukraine',
             startYear: '2017-09-01',
             endYear: '2020-03-01',
-            error: false
+            error: false,
+            closed: true
           },
           {
             placeName: 'KPI',
@@ -125,10 +127,11 @@ export default {
             country: 'Ukraine',
             startYear: '2017-09-01',
             endYear: '2020-03-01',
-            error: false
+            error: false,
+            closed: true
           }
         ],
-        id: "resumeEdu"
+        id: "Education"
       },
       resumeExp: {
         expPlaces: [
@@ -151,33 +154,17 @@ export default {
             closed: true
           }
         ],
-        id: "resumeExp"
+        id: "Experience"
       },
       resumeSkills: {
         skills: [
-          {
-            text: 'Bootstrap',
-            edit: false
-          },
-          {
-            text: 'JS',
-            edit: false
-          },
-          {
-            text: 'HTML',
-            edit: false
-          },
-          {
-            text: 'Git',
-            edit: false
-          },
-          {
-            text: 'Less',
-            edit: false
-          },
+          'Bootstrap',
+          'Less',
+          'Html',
+          'Css',
+          'JS'
         ],
-        id: "resumeSkills",
-        edit: false
+        id: "Skills"
       }
     }
   },
