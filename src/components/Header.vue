@@ -19,6 +19,7 @@
     height: 70px;
     position: fixed;
     width: 100%;
+    top: 0;
     z-index: 2;
     border-bottom: 3px #2f7091 solid;
         #logo {

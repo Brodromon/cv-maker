@@ -1,6 +1,8 @@
 <template>
   <div class="main-container">
-    <div class="container">
+    <Header></Header>
+    <Sidebar class="col-md-2"></Sidebar>
+    <div class="container col-md-8 col-md-offset-2">
       <div id="resume">
         <div v-on:click="resumeHdrEdit(resumeHdr.person, resumeHdr.id)" class="block resume__hdr row">
           <div class="col-md-6">
@@ -77,6 +79,8 @@
 
 <script>
 import { EventBus } from '../bus/index.js'
+import Sidebar from '@/components/Sidebar.vue'
+import Header from '@/components/Header.vue'
 
 export default {
   name: 'HelloWorld',
@@ -184,7 +188,8 @@ export default {
     resumeSkillsEdit(data, id) {
       EventBus.$emit('resume-skills-edit', data, id)
     }
-  }
+  },
+  components: {Header, Sidebar}
 }
 </script>
 
@@ -201,7 +206,7 @@ export default {
       &:hover {
         border: 3px #296684 solid;
         box-sizing: border-box;
-        padding: 22.1px 0;
+        padding: 22.77px 0.77px;
         cursor: pointer;
       }
       .block__hdr {

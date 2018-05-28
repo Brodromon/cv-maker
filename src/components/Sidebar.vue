@@ -225,18 +225,13 @@ export default {
             padding: 0;
             li {
                 list-style: none;
+                position: relative;
+                border-bottom: 1px #e8e8e8 solid;
+                padding: 7px 0;
+                &:first-child {
+                    padding-top: 0;
+                }
             }
-        }
-        li {
-            position: relative;
-            border-bottom: 1px #e8e8e8 solid;
-            padding: 7px 0;
-            &:first-child {
-                padding-top: 0;
-            }
-            &:last-child {
-                border: none;
-        }
         }
         h5 {
             display: inline-block;
@@ -294,6 +289,7 @@ export default {
                 width: 100%;
                 font-size: 30px;
                 padding: 2px;
+                margin-top: 36px;
                 }
         textarea {
             resize: none;
@@ -308,7 +304,6 @@ export default {
         }
         .resumeExp {
             li {
-                position: relative;
                 padding: 12px 0;           
                 span {
                     position: absolute;
