@@ -17,11 +17,11 @@
         },
         methods: {
             SignUserIn(email, pass) {
-                firebase.auth().createUserWithEmailAndPassword(email, pass).catch(function(error) {
+                firebase.auth().signInWithEmailAndPassword(email, pass).catch(function(error) {
                     var errorCode = error.code;
                     var errorMessage = error.message;
                 });
-                this.$router.push('/main');
+                this.$router.push(firebase.auth().currentUser.uid + '/main');
             }
         }
     }

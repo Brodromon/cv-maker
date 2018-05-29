@@ -19,12 +19,15 @@
         },
         methods: {
             SignUserUp(email, pass, confirmPass) {
-                if(pass == confirmPass) {
+                if(pass == confirmPass || pass != null) {
                     firebase.auth().createUserWithEmailAndPassword(email, pass).catch(function(error) {
-                    var errorCode = error.code;
-                    var errorMessage = error.message;
-                });
-                this.$router.push('/login')
+                        var errorCode = error.code;
+                    });
+                    firebase.database().ref('users/' + firebase.auth().currentUser.uid).set({
+                        cvs: [],
+                        email: email
+                    })
+                    this.$router.push('/login')
                 }
             }
         }

@@ -25,8 +25,9 @@ export default new Router({
       component: Signup
     },
     {
-      path: '/main',
+      path: ':uid/main',
       name: 'Main',
+      props: true,
       component: Main
     },
     

@@ -17,8 +17,7 @@
     width: 320px;
     margin-right: -160px;
     height: 90px;
-    top: 50%;
-    margin-top: -45px;
+    top: 30%;
 }
     h3 {
         text-align: center;

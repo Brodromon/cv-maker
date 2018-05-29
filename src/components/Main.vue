@@ -14,7 +14,7 @@
             <ul id="adress">
               <li><span>Number:</span> {{resumeHdr.person.personData.number}}</li>
               <li><span>E-mail:</span> {{resumeHdr.person.personData.email}}</li>
-              <li><span>Adress:</span>ul. {{resumeHdr.person.personData.adress}}</li>
+              <li><span>Adress:</span> {{resumeHdr.person.personData.adress}} st.</li>
             </ul>
           </div>
         </div>
